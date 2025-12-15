@@ -1,0 +1,42 @@
+
+#include <stdio.h>
+#include<math.h>
+/** @breif - Рассчитывает функцию A по заданной формуле
+* @param x - переменная со значением x
+* @param y - переменная со значением y
+* @param z - переменная со значением z
+* @return рассчитанное значение*/
+double geta(const double x,const double y);
+/* @breif - Рассчитывает функцию B по заданной формуле
+* @param x - переменная со значением x
+* @param y - переменная со значением y
+* @param z - переменная со значением z
+* @return рассчитанное значение*/
+double getb(const double x, const double y, const double z);
+/** 
+  * @breif Точка входа
+ * @return 0, если ошибок нет 
+ * */
+int main()
+{
+  const double x=1.825;
+  const double y=18.225;
+  const double z=3.298;
+  double a=geta(x,y);
+  double b=getb(x,y,z);
+  printf("a=%f\n",a);
+  printf("b=%f\n",b);
+  return 0;
+}
+
+double geta(const double x,const double y)
+{ 
+  double a=pow(x,y/x)-pow(x/y,1/3);
+  return a ;
+}
+
+double getb(const double x, const double y, const double z)
+{
+    double b = (y-x)+(y-z/y-x)/(3+(z*z/5));
+    return b ;
+}
