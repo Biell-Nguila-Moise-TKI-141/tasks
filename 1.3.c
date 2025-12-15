@@ -36,4 +36,5 @@ void checkvalue (const double value)
         printf("ecrivez une valeur positive");
         abort ();
     }
+
 }
