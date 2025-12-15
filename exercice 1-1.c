@@ -33,4 +33,5 @@ return a ;}
 double getb(const double x, const double y, const double z){
     double b;
     b=(y-x)+(y-z/y-x)/(3+(z*z/5));
+
     return b ;}
