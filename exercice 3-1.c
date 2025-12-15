@@ -42,3 +42,4 @@ double Y;//c'est la variable resulat de la fonction
     return Y;
 }
 
+
