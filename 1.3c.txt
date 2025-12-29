@@ -3,68 +3,57 @@
 #include <stdlib.h>
 /**
  * @brief Calcule le poids d'un objet
- * 
  * Cette fonction calcule le poids (P) d'un objet en utilisant la formule
  * physique : P = m × g, où :
  * - P est le poids en Newtons (N)
  * - m est la masse en kilogrammes (kg)
  * - g est l'accélération gravitationnelle en m/s²
- * 
-  * 
- * @param[in] m Masse de l'objet (en kg)
- * @param[in] g Accélération gravitationnelle (en m/s²)
- * 
+ * @param m Masse de l'objet (en kg)
+ * @param g Accélération gravitationnelle (en m/s²)
  * @return double Le poids calculé (en Newtons)
- * 
  * @note La valeur par défaut de g est généralement 9.8 m/s² sur Terre
  * @see La constante g est définie dans la fonction main()
  */
 double getP(const double m,const double g);
+
 /**
  * @brief Lit une valeur numérique depuis l'entrée standard
- * 
  * Cette fonction lit une valeur à virgule flottante depuis l'entrée
  * standard (stdin, généralement le clavier) et gère les erreurs de saisie.
- * 
  * @return double La valeur numérique lue depuis l'entrée
- * 
  * @note Cette fonction utilise scanf() pour la lecture
  * @warning Si l'utilisateur entre une valeur non numérique, le programme
  *          s'arrête immédiatement avec un appel à abort()
- * 
-  * 
  * @exception En cas d'échec de lecture (entrée non numérique), affiche
  *            "erreur" et termine le programme avec abort()
- * 
  * @code
  * // Exemple d'utilisation :
  * double masse = getvalue();  // Attend une saisie utilisateur
  * @endcode
  */
 double getvalue();
+
 /**
  * @brief Vérifie si une valeur numérique est valide
- * 
  * Cette fonction vérifie qu'une valeur numérique est strictement positive.
  * Elle est utilisée pour valider les données d'entrée avant traitement.
- * 
- * @param[in] value La valeur à vérifier
- * 
+ * @param value La valeur à vérifier
  * @note Conçu spécifiquement pour vérifier des grandeurs physiques
- *       qui doivent être positives (masse, distance, temps, etc.)
- * 
+ * qui doivent être positives (masse, distance, temps, etc.)
  * @warning Si la valeur est négative ou nulle, le programme s'arrête
  *          immédiatement avec un appel à abort()
-  * 
- * @exception Si value <= 0, affiche un message d'erreur et termine
+ *@exception Si value <= 0, affiche un message d'erreur et termine
  *            le programme avec abort()
- * 
  * @pre La valeur doit être un nombre réel
  * @post Si la fonction retourne (ne s'arrête pas), value > 0
- * 
  * @see Cette fonction est typiquement appelée après getvalue()
  */
 void checkvalue(const double value);
+
+/**
+* @brief Cette fonction principal de code
+* @return 0 si le programme fonctionne correctement
+*/
 int main()
 {
     const double g=9.8 ;
@@ -98,4 +87,5 @@ void checkvalue (const double value)
         abort ();
     }
 }
+
 
