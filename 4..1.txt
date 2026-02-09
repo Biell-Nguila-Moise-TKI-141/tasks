@@ -1,0 +1,237 @@
+#include <stdio.h>
+#include <stdlib.h>
+/**
+ * @brief считывает целое значение с клавиатуры в проверкой ввода
+ * @return возвращает считанное значение
+ */
+int Value();
+/**
+ * @brief считывает размер с клавиатуры с проверкой ввода и корректности значения
+ * @param message сообщение для пользователя, которое выводится перед вводом
+ * @return возвращает считанное значение типа size_t
+ */
+size_t getSize(char* message);
+/**
+ * @brief заполняет массив числами,введенными с клавиатуры
+ * @param arr указатель на массив для заполнения
+ * @param size размер массива
+ */
+void fillArray(int* arr, const size_t size);
+/**
+ * @brief меняет последний элемент на модуль первого
+ * @param arr указатель на массив для заполнения
+ * @param size размер массива
+ */
+void replaceLastElement ( int* arr, const size_t size);
+/**
+ * @brief создает копию массива
+ * @param arr указатель на исходный массив
+ * @param size размер массива
+ * @return указатель на новый массив-копию
+ */
+int* copyArray(const int* arr, const size_t size);
+/**
+ * @brief освбождает память и выводит ошибку
+ * @param arr массив для освобождения
+ * @param message сообщение об ошибке
+ */
+void handleError(int* arr, char* message);
+/**
+ * @brief удаляет элементы с одинаковыми цифрами
+ * @param arr указатель на массив для заполнения
+ * @param size размер массива
+ */
+void removeSameElements(int* arr,const size_t size);
+/**
+ * @brief умножает элемент в массиве на его порядковый номер если число четное,меняет знак элементу ,если оно нечетное
+ * @param arr казатель на массив для заполнения
+ * @param size размер массива
+ */
+void newArrayWRules(int* arr,const size_t size);
+/**
+@brief RANDOM -  заполняет массив случайными числами
+@brief MANUAL - заполняет массив числами введенными с клавиатуры
+*/
+enum {RANDOM = 1, MANUAL = 2};
+/**
+@brief EEX1  -  выполняет первую функцию
+@brief EEX2  -  выполняет вторую функцию
+@brief EEX3  -  выполняет третью функцию
+*/
+enum{EEX1 =1 , EEX2 = 2, EEX3 =3};
+/**
+ * @brief Точка входа в программу
+ * @return 0, если программа выполнена корректно, иначе 1
+ */
+int main()
+{
+
+
+    size_t size = getSize("Введите размер массива:  ");
+    int* arr = malloc(size * sizeof(int));
+    if (arr == NULL)
+        {
+            handleError(NULL, "Ошибка выделения памяти!");
+        }
+    printf("Выберите способ заполнения массива:\n"
+            "%d случайными числамиб %d вручную ", RANDOM, MANUAL);
+    int choice = Value();
+    switch(choice)
+{
+        case RANDOM:
+            fillRandom(arr, size);
+            break;
+        case MANUAL:
+            fillArray(arr, size);
+            break;
+        default:
+            printf("error");
+            free(arr);
+            break;
+    }
+    int* copyArr = copyArray(arr, size);
+        if (copyArr == NULL)
+        {
+            handleError(arr, "Ошибка выделения памяти для копии массива!");
+        }
+    printArray(arr, size);
+    printf("выберите задание : 1) 2) 3)");
+    int choice2 = Value();
+    switch(choice2)
+    {
+        case EEX1:
+            replaceLastElement (copyArr,size);
+            break;
+        case EEX2:
+            removeSameElements(copyArr,size);
+            break;
+        case EEX3:
+            newArrayWRules(copyArr,size);
+            break;
+        default:
+            printf("error");
+            free(arr);
+            break;
+    }
+    free(arr);
+    free(copyArr);
+    return 0;
+}
+int Value()
+{
+    int value = 0;
+    if (!scanf("%d", &value))
+    {
+        printf("ERROR\n");
+        abort();
+    }
+            break;
+        case EEX2:
+            removeSameElements(copyArr,size);
+            break;
+        case EEX3:
+            newArrayWRules(copyArr,size);
+            break;
+        default:
+            printf("error");
+            free(arr);
+            break;
+    }
+    free(arr);
+    free(copyArr);
+    return 0;
+}
+int Value()
+{
+    int value = 0;
+    if (!scanf("%d", &value))
+    {
+        printf("ERROR\n");
+        abort();
+    }
+    for (size_t i = 0; i < size; i++)
+    {
+        arr[i] = (rand() % (end - start + 1)) + start;
+    }
+}
+int* copyArray(const int* arr, const size_t size)
+{
+    int* copyArr = malloc(sizeof(int)*size);
+    for (size_t i =0; i<size; i++)
+    {
+        copyArr[i] = arr[i];
+    }
+    return copyArr;
+}
+size_t getSize(char* message)
+{
+    printf("%s", message);
+    int value = Value();
+    if (value <= 0)
+    {
+        printf("ERROR");
+        abort();
+    }
+    return (size_t)value;
+}
+void replaceLastElement( int* arr, const size_t size)
+{
+        printf("старый массив :");
+        printArray(arr,size);
+        arr[size - 1] = abs(arr[0]);
+        printf("новый массив: ");
+        printArray(arr,size);
+}
+void newArrayWRules(int* arr,const size_t size)
+{
+    printf("Исходный массив: ");
+    printArray(arr, size);
+
+    for (size_t i = 0; i < size; i++)
+    {
+        if (arr[i] % 2 == 0)
+        {
+            arr[i] = arr[i] * (i + 1);
+        }
+        else
+        {
+            arr[i] = -arr[i];
+        }
+    }
+
+    printf("Результат: ");
+    printArray(arr, size);
+}
+
+
+void removeSameElements(int* arr,size_t size)
+{
+    printf("Преобразование массива из %zu элементов\n", size);
+
+    for (size_t i = 0; i < size; i++) {
+        int value = arr[i];  // Сохраняем исходное значение
+
+        if (value % 2 == 0) {
+            arr[i] = value * (i + 1);
+        } else {
+            arr[i] = value * (-1);
+        }
+    }
+
+    printf("Преобразование завершено\n");
+}
+void handleError(int* arr, char* message)
+{
+    if (arr != NULL)
+    {
+        free(arr);
+    }
+    fprintf(stderr, "%s\n", message);
+    exit(1);
+}
+
+
+
+
+
+
