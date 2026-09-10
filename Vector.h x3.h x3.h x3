@@ -1,0 +1,71 @@
+#pragma once
+#include <initializer_list>
+#include <string>
+#include <stdexcept>
+
+class Vector {
+private:
+/** @brief Указатель на динамический массив элементов. */
+    int* m_data;
+     /** @brief Текущее количество элементов в векторе. */        
+    size_t m_size; 
+     /** @brief Текущая вместимость выделенной памяти (в элементах). */     
+    size_t m_capacity;   
+
+    /**
+     * @brief Перевыделяет динамическую память под новый размер.
+     * Переносит существующие элементы в новый буфер. Старая память освобождается.
+     */
+    void reallocate(const size_t new_capacity);
+
+public:
+    Vector();
+    Vector(const std::initializer_list<int> list);
+    Vector(const Vector& other); // Глубокое копирование
+    Vector(Vector&& other) noexcept; // Перенос указателей без копирования
+    ~Vector();
+
+    /**
+     * @brief Вставляет элемент по индексу.
+     * Сдвигает последующие элементы вправо. При необходимости расширяет память.
+     * @throw std::out_of_range Если index > size().
+     */
+    void insert(const size_t index, const int value);
+
+    /**
+     * @brief Удаляет элемент по индексу.
+     * Сдвигает последующие элементы влево.
+     * @throw std::out_of_range Если индекс некорректен или вектор пуст.
+     */
+    void remove(const size_t index);
+
+    /**
+     * @brief Ищет элемент по значению.
+     * @return Индекс первого найденного элемента или -1, если совпадений нет.
+     */
+    int find(const int value) const;
+
+    bool isEmpty() const;
+    std::string ToString() const; // Форматирует вектор в строку для вывода
+    size_t size() const;
+
+    Vector& operator=(const Vector& other);
+    Vector& operator=(Vector&& other) noexcept;
+
+    // Операторы [] не проверяют выход за границы для максимальной скорости.
+    int& operator[](const size_t index);
+    const int& operator[](const size_t index) const;
+
+    /**
+     * @brief Добавляет элемент в конец вектора (аналог push_back).
+     * Позволяет делать цепочки вызовов: v << 5 << 10;
+     */
+    Vector& operator<<(const int value);
+
+    /**
+     * @brief Извлекает и удаляет последний элемент из вектора (аналог pop_back).
+     * @param value Переменная для сохранения извлеченного значения.
+     * @throw std::underflow_error Если вектор пуст.
+     */
+    Vector& operator>>(int& value);
+};
