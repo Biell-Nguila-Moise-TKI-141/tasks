@@ -1,0 +1,54 @@
+#pragma once
+
+#include <iostream>
+#include <cmath>
+
+/**
+ * @brief Структура, представляющая точку на плоскости.
+ */
+struct Point {
+    double x; /**< Координата X */
+    double y; /**< Координата Y */
+
+    /**
+     * @brief Сравнение двух точек на равенство.
+     * @param other Другая точка.
+     * @return true, если точки совпадают.
+     */
+    bool operator==(const Point& other) const {
+        const double eps = 1e-9;
+        return std::abs(x - other.x) < eps && std::abs(y - other.y) < eps;
+    }
+
+    /**
+     * @brief Сравнение двух точек на неравенство.
+     * @param other Другая точка.
+     * @return true, если точки не совпадают.
+     */
+    bool operator!=(const Point& other) const {
+        return !(*this == other);
+    }
+};
+
+/**
+ * @brief Оператор вывода точки в поток.
+ * @param os Выходной поток.
+ * @param p Точка.
+ * @return Ссылка на поток.
+ */
+inline std::ostream& operator<<(std::ostream& os, const Point& p) {
+    os << "(" << p.x << ", " << p.y << ")";
+    return os;
+}
+
+/**
+ * @brief Оператор ввода точки из потока.
+ * @param is Входной поток.
+ * @param p Точка.
+ * @return Ссылка на поток.
+ */
+inline std::istream& operator>>(std::istream& is, Point& p) {
+    is >> p.x >> p.y;
+    return is;
+}
+
