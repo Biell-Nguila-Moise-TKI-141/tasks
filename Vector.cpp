@@ -69,7 +69,7 @@ void Vector::reallocate(size_t new_size) {
  * @param value Число для вставки.
  * @throws std::out_of_range Если индекс неправильный.
  */
-void Vector::insert(size_t index, int value) {
+void Vector::insert(size_t index, const int value) {
     if (index > m_size) {
         throw std::out_of_range("Индекс за пределами вектора");
     }
